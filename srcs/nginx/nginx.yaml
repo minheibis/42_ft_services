@@ -1,16 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-spec:
-  selector: 
-    app: nginx
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,3 +18,36 @@ spec:
       - name: nginx
         image: service_nginx:latest
         imagePullPolicy: Never
+        ports:
+          - containerPort: 80
+            name: nginx-http
+          - containerPort: 443
+            name: nginx-https
+          - containerPort: 22
+            name: nginx-ssh
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  type: LoadBalancer
+  ports:
+    - port: 80
+      name: nginx-http
+      targetPort: 80
+      nodePort: 80
+    - port: 443
+      name: nginx-https
+      targetPort: 443
+      nodePort: 443
+    - port: 22
+      name: nginx-ssh
+      targetPort: 22
+      nodePort: 22
