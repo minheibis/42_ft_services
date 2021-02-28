@@ -1,8 +1,11 @@
+#!/bin/sh
+
 # starting minikube
 echo "Starting minikube..."
 minikube stop
 minikube delete
-minikube --vm-driver=docker start --extra-config=apiserver.service-node-port-range=1-35000
+#minikube start --vm-driver=docker
+minikube start --vm-driver=docker --extra-config=apiserver.service-node-port-range=0-65535
 
 #setting cluster ip
 CLUSTER_IP="$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)"
@@ -16,12 +19,12 @@ sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/metallb/metallb_conf.yaml
 echo "Installing MetalLb..."
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-# On first install only
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f srcs/metallb/metallb_conf.yaml
 
 echo "Enabling addons..."
-minikube addons enable metrics-server
-minikube addons enable dashboard
+#minikube addons enable dashboard
+#minikube addons enable metrics-server
 
 echo "Building images..."
 eval $(minikube docker-env) #set env to build image inside minikube docker
@@ -50,11 +53,11 @@ kubectl apply -f ./srcs/nginx/nginx.yaml
 #kubectl apply -f ./srcs/ftps/ftps.yaml
 
 #echo "Opening the network in your browser"
-#open http://$IP
+open http://$IP
 
 # create test pod
-echo "Creating test pods..."
-kubectl apply -f bastion.yaml
+#echo "Creating test pods..."
+#kubectl apply -f bastion.yaml
 
 # open dashbord
 echo "Launching dashboard..."
