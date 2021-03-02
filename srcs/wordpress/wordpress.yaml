@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: service_wordpress:latest
+        imagePullPolicy: Never
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql-service:3306
+        - name: WORDPRESS_DB_PASSWORD
+          value: mysql_pass
+        ports:
+        - containerPort: 5050
+          name: http
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "true"
+  name: wordpress-service
+spec:
+  selector:
+    app: wordpress
+  type: LoadBalancer
+  ports:
+    - name: wordpress
+      protocol: TCP
+      port: 5050
+      targetPort: 5050

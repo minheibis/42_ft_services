@@ -1,8 +1,8 @@
-FROM alpine:latest
+FROM alpine:3.9
 
 # install packages
 RUN apk update; \
-apk --no-cache add curl openssh openssl nginx openrc; \
+apk --no-cache add bash vim curl openssh openssl nginx openrc; \
 adduser -D -g 'www' www; \
 mkdir /www; \
 mkdir -p /run/nginx ; \

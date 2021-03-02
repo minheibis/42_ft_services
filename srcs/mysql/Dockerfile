@@ -1,11 +1,31 @@
-FROM alpine:latest
+FROM alpine:3.9
 
-# install packages
+# Installing packages MariaDB
 RUN apk update; \
-	apk --no-cache add openrc mysql;
+	apk add --no-cache bash vim openrc mysql mysql-client
+#RUN addgroup mysql mysql; \
+#	chown -R mysql:mysql /var/lib/mysql; \
+#	mkdir -p /run/openrc; \
+#	touch /run/openrc/softlevel; \
+#	mkdir -p /run/mysqld/; \
+#	touch /run/mysqld/mysqld.sock; \
+#	chown -R mysql:mysql /run/mysqld/
+COPY my.cnf /etc/
 
-#COPY mysql.cnf /etc/my.cnf
-#COPY mysql.cnf /etc/my.cnf
-COPY creatdb.sql .
-COPY setup_mysql.sh .
-COPY wordpress.sql .
+# Copy of the MySQL startup script
+#COPY start.sh start.sh
+
+# Creating the persistent volume
+# VOLUME [ "/var/lib/mysql" ]
+
+EXPOSE 3306
+
+COPY start.sh .
+
+#COPY init.sql .
+
+EXPOSE 3306
+
+CMD /bin/sh /start.sh
+
+#ENTRYPOINT [ "./start.sh" ]
