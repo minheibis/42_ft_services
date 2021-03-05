@@ -22,7 +22,7 @@ spec:
         - name: WORDPRESS_DB_HOST
           value: mysql-service:3306
         - name: WORDPRESS_DB_PASSWORD
-          value: mysql_pass
+          value: wp-pass
         ports:
         - containerPort: 5050
           name: http

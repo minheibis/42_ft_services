@@ -4,7 +4,7 @@
 echo "Starting minikube..."
 minikube stop
 minikube delete
-#minikube start --vm-driver=docker
+#	minikube start --vm-driver=docker
 minikube start --vm-driver=docker --extra-config=apiserver.service-node-port-range=0-65535
 
 #setting cluster ip
@@ -29,9 +29,17 @@ echo "Enabling addons..."
 echo "Building images..."
 eval $(minikube docker-env) #set env to build image inside minikube docker
 docker build --no-cache  -t service_nginx ./srcs/nginx
+kubectl apply -f ./srcs/nginx/nginx.yaml
+
 docker build --no-cache  -t service_mysql ./srcs/mysql
-docker build --no-cache  -t service_phpmyadmin ./srcs/php_my_admin
+kubectl apply -f ./srcs/mysql/mysql.yaml
+
 docker build --no-cache  -t service_wordpress ./srcs/wordpress
+kubectl apply -f ./srcs/wordpress/wordpress.yaml
+
+docker build --no-cache  -t service_phpmyadmin ./srcs/php_my_admin
+kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
+
 #docker build --no-cache  -t service_influxdb ./srcs/influxdb
 #docker build --no-cache  -t service_telegraf ./srcs/telegraf
 #docker build --no-cache  -t service_grafana ./srcs/grafana
@@ -43,10 +51,7 @@ eval $(minikube docker-env -u) #unset env
 #printf "Minikube IP: ${IP}"
 
 echo "Creating deployments and services..."
-kubectl apply -f ./srcs/nginx/nginx.yaml
-kubectl apply -f ./srcs/mysql/mysql.yaml
-kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
-kubectl apply -f ./srcs/wordpress/wordpress.yaml
+sleep 10
 #kubectl apply -f ./srcs/influxdb/influxdb.yaml
 #kubectl apply -f ./srcs/telegraf/telegraf.yaml
 #kubectl apply -f ./srcs/grafana/grafana.yaml
