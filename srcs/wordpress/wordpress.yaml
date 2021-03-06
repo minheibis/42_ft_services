@@ -18,14 +18,9 @@ spec:
       - name: wordpress
         image: service_wordpress:latest
         imagePullPolicy: Never
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: mysql-service:3306
-        - name: WORDPRESS_DB_PASSWORD
-          value: wp-pass
         ports:
         - containerPort: 5050
-          name: http
+          name: wordpress
 
 ---
 

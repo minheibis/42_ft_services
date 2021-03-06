@@ -10,6 +10,7 @@ RUN addgroup mysql mysql; \
 	chown -R mysql:mysql /run/mysqld/
 
 COPY start.sh .
+COPY start.sql /tmp/start.sql
 
 EXPOSE 3306
 
