@@ -42,7 +42,6 @@ docker build --no-cache  -t service_phpmyadmin ./srcs/php_my_admin
 kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
 
 #docker build --no-cache  -t service_influxdb ./srcs/influxdb
-#docker build --no-cache  -t service_telegraf ./srcs/telegraf
 #docker build --no-cache  -t service_grafana ./srcs/grafana
 #docker build --no-cache  -t service_ftps ./srcs/ftps
 eval $(minikube docker-env -u) #unset env
@@ -53,12 +52,11 @@ eval $(minikube docker-env -u) #unset env
 
 sleep 10
 #kubectl apply -f ./srcs/influxdb/influxdb.yaml
-#kubectl apply -f ./srcs/telegraf/telegraf.yaml
 #kubectl apply -f ./srcs/grafana/grafana.yaml
 #kubectl apply -f ./srcs/ftps/ftps.yaml
 
 #echo "Opening the network in your browser"
-open http://$IP
+open http://$CLUSTER_IP
 
 # create test pod
 #echo "Creating test pods..."
