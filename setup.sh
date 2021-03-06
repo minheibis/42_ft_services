@@ -41,7 +41,10 @@ kubectl apply -f ./srcs/wordpress/wordpress.yaml
 docker build --no-cache  -t service_phpmyadmin ./srcs/php_my_admin
 kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
 
-#docker build --no-cache  -t service_influxdb ./srcs/influxdb
+docker build --no-cache  -t service_influxdb ./srcs/influxdb
+kubectl apply -f ./srcs/influxdb/influxdb.yaml
+
+
 #docker build --no-cache  -t service_grafana ./srcs/grafana
 #docker build --no-cache  -t service_ftps ./srcs/ftps
 eval $(minikube docker-env -u) #unset env
@@ -50,8 +53,6 @@ eval $(minikube docker-env -u) #unset env
 #IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)
 #printf "Minikube IP: ${IP}"
 
-sleep 10
-#kubectl apply -f ./srcs/influxdb/influxdb.yaml
 #kubectl apply -f ./srcs/grafana/grafana.yaml
 #kubectl apply -f ./srcs/ftps/ftps.yaml
 
