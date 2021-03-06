@@ -1,7 +1,10 @@
 FROM alpine:3.9
 
-RUN apk update && apk add bash influxdb
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories;
+RUN apk update && apk add bash influxdb telegraf
 
 EXPOSE 8086
 
-CMD influxd -config /etc/influxdb.conf
+COPY start.sh .
+# Launch all
+CMD /bin/bash start.sh

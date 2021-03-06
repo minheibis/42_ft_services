@@ -1,8 +1,9 @@
 FROM alpine:3.9
 
 # Installing packages MariaDB
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories;
 RUN apk update; \
-	apk add --no-cache bash vim openrc mysql mysql-client
+	apk add --no-cache bash vim openrc mysql mysql-client telegraf
 
 RUN addgroup mysql mysql; \
 	chown -R mysql:mysql /var/lib/mysql; \

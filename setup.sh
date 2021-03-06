@@ -44,17 +44,19 @@ kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
 docker build --no-cache  -t service_influxdb ./srcs/influxdb
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
 
+docker build --no-cache  -t service_grafana ./srcs/grafana
+kubectl apply -f ./srcs/grafana/grafana.yaml
 
-#docker build --no-cache  -t service_grafana ./srcs/grafana
 #docker build --no-cache  -t service_ftps ./srcs/ftps
+#kubectl apply -f ./srcs/ftps/ftps.yaml
+
+
 eval $(minikube docker-env -u) #unset env
 
 #IP=$(minikube ip)
 #IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)
 #printf "Minikube IP: ${IP}"
 
-#kubectl apply -f ./srcs/grafana/grafana.yaml
-#kubectl apply -f ./srcs/ftps/ftps.yaml
 
 #echo "Opening the network in your browser"
 open http://$CLUSTER_IP
