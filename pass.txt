@@ -1,2 +1,4 @@
-mysql		user:wordpress		password: wppass
-grafana		user:admin			password: admin
+mysql		user: wordpress		password: wppass
+grafana		user: admin			password: admin
+ftps		user: user			password: pass
+ssh			user: user			password: pass

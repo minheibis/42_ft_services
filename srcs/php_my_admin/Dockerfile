@@ -1,9 +1,8 @@
-FROM alpine:3.9
+FROM base_docker:latest
 
 # install packages
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories;
 RUN apk update; \
-	apk --no-cache add bash vim curl openssl nginx openrc mysql-client telegraf; \
+	apk --no-cache add nginx openrc; \
 	apk --no-cache add lighttpd php7-common php7-iconv php7-json php7-gd php7-curl;\
 	apk --no-cache add php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo ;\
 	apk --no-cache add php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt ;\

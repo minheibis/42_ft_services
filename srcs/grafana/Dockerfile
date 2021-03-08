@@ -1,6 +1,6 @@
-FROM alpine:3.9
+FROM base_docker:latest
 
-RUN apk add --no-cache bash vim libc6-compat
+RUN apk add --no-cache libc6-compat
 
 RUN wget https://dl.grafana.com/oss/release/grafana-7.4.3.linux-amd64.tar.gz
 RUN tar -zxvf grafana-7.4.3.linux-amd64.tar.gz; \

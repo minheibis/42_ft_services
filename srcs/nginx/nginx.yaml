@@ -18,11 +18,23 @@ spec:
       - name: nginx
         image: service_nginx:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep sshd && pgrep nginx"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+          - name: USER
+            value: user
+          - name: PASSWORD
+            value: pass
         ports:
         - containerPort: 80
           name: http
         - containerPort: 443
           name: https
+        - containerPort: 22
+          name: ssh
 
 ---
 
@@ -45,3 +57,7 @@ spec:
       protocol: TCP
       port: 443
       targetPort: 443
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22

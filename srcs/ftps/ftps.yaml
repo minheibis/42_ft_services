@@ -22,16 +22,16 @@ spec:
           - name: USER
             value: user
           - name: PASSWORD
-            value: ftpspass
+            value: pass
         ports:
-          - containerPort: 20
-            name: ftps_control
           - containerPort: 21
-            name: ftps_data
+            name: ftps-control
+          - containerPort: 20
+            name: ftps-data
           - containerPort: 21000
-            name: ftps_opasv_min_port
+            name: ftps-opasv-min
           - containerPort: 21001 
-            name: ftps_opasv_max_port
+            name: ftps-opasv-max
 
 ---
 
@@ -46,19 +46,19 @@ spec:
     app: ftps
   type: LoadBalancer
   ports:
-  - port: 20
-    name: ftps_control
-    targetPort: 20
-    protocol: TCP
   - port: 21
-    name: ftps_data
+    name: ftps-control
     targetPort: 21
     protocol: TCP
+  - port: 20
+    name: ftps-data
+    targetPort: 20
+    protocol: TCP
   - port: 21000
-    name: ftps_opasv_min_port
+    name: ftps-opasv-min
     targetPort: 21000
     protocol: TCP
   - port: 21001
-    name: ftps_opasv_max_port
+    name: ftps-opasv-max
     targetPort: 21001
     protocol: TCP

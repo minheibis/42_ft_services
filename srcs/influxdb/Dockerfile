@@ -1,7 +1,6 @@
-FROM alpine:3.9
+FROM base_docker:latest
 
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories;
-RUN apk update && apk add bash influxdb telegraf
+RUN apk update && apk add influxdb
 
 EXPOSE 8086
 

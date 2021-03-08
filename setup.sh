@@ -10,9 +10,10 @@ minikube start --vm-driver=docker --extra-config=apiserver.service-node-port-ran
 #setting cluster ip
 CLUSTER_IP="$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)"
 sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/metallb/metallb_conf.yaml
+sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/ftps/vsftpd.conf
 #sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/ftps/setup_ftps.sh
 sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/nginx/nginx.conf
-sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/wordpress/wp-config.php
+#sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/wordpress/wp-config.php
 #sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/mysql/wordpress.sql
 #sed -i 's/192.168.49.2/'$CLUSTER_IP'/g' srcs/telegraf/telegraf.conf
 
@@ -29,6 +30,8 @@ echo "Enabling addons..."
 
 echo "Building images & Creating deployments and services..."
 eval $(minikube docker-env) #set env to build image inside minikube docker
+docker build --no-cache  -t base_docker ./srcs/base_docker
+
 docker build --no-cache  -t service_influxdb ./srcs/influxdb
 kubectl apply -f ./srcs/influxdb/influxdb.yaml
 

@@ -1,7 +1,6 @@
-FROM	alpine:3.9
+FROM base_docker:latest
 
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories;
-RUN	apk update && apk add nginx curl mysql-client telegraf php7 php7-fpm \
+RUN	apk update && apk add nginx php7 php7-fpm \
 	php7-mcrypt php7-soap php7-openssl php7-gmp \
 	php7-pdo_odbc php7-json php7-dom php7-pdo \
 	php7-zip php7-mysqli php7-sqlite3 php7-apcu \
