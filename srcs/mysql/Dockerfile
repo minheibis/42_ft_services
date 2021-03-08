@@ -13,6 +13,10 @@ RUN addgroup mysql mysql; \
 COPY start.sh .
 COPY start.sql /tmp/start.sql
 
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
+
 EXPOSE 3306
 
 CMD /bin/bash /start.sh

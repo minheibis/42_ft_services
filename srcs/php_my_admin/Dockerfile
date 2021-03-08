@@ -41,6 +41,10 @@ COPY start.sh .
 # setup nginx
 RUN rc-service nginx checkconfig
 
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
+
 EXPOSE 5000
 
 # Launch all

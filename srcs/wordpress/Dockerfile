@@ -28,6 +28,9 @@ COPY ./wp-config.php /var/www/wordpress/
 
 RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/example.key -out /etc/nginx/example.crt -subj "/C=FR/ST=IDE/L=Paris/O=42/OU=42/CN=mywebsite.com" 
 
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
 
 COPY ./start.sh .
 

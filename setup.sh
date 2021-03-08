@@ -29,6 +29,9 @@ echo "Enabling addons..."
 
 echo "Building images & Creating deployments and services..."
 eval $(minikube docker-env) #set env to build image inside minikube docker
+docker build --no-cache  -t service_influxdb ./srcs/influxdb
+kubectl apply -f ./srcs/influxdb/influxdb.yaml
+
 docker build --no-cache  -t service_nginx ./srcs/nginx
 kubectl apply -f ./srcs/nginx/nginx.yaml
 
@@ -41,14 +44,11 @@ kubectl apply -f ./srcs/wordpress/wordpress.yaml
 docker build --no-cache  -t service_phpmyadmin ./srcs/php_my_admin
 kubectl apply -f ./srcs/php_my_admin/php_my_admin.yaml
 
-docker build --no-cache  -t service_influxdb ./srcs/influxdb
-kubectl apply -f ./srcs/influxdb/influxdb.yaml
-
 docker build --no-cache  -t service_grafana ./srcs/grafana
 kubectl apply -f ./srcs/grafana/grafana.yaml
 
-#docker build --no-cache  -t service_ftps ./srcs/ftps
-#kubectl apply -f ./srcs/ftps/ftps.yaml
+docker build --no-cache  -t service_ftps ./srcs/ftps
+kubectl apply -f ./srcs/ftps/ftps.yaml
 
 
 eval $(minikube docker-env -u) #unset env

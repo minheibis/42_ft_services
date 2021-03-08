@@ -18,11 +18,20 @@ spec:
       - name: ftps
         image: service_ftps:latest
         imagePullPolicy: Never
+        env:
+          - name: USER
+            value: user
+          - name: PASSWORD
+            value: ftpspass
         ports:
-        - containerPort: 80
-          name: http
-        - containerPort: 443
-          name: https
+          - containerPort: 20
+            name: ftps_control
+          - containerPort: 21
+            name: ftps_data
+          - containerPort: 21000
+            name: ftps_opasv_min_port
+          - containerPort: 21001 
+            name: ftps_opasv_max_port
 
 ---
 
@@ -37,11 +46,19 @@ spec:
     app: ftps
   type: LoadBalancer
   ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 443
+  - port: 20
+    name: ftps_control
+    targetPort: 20
+    protocol: TCP
+  - port: 21
+    name: ftps_data
+    targetPort: 21
+    protocol: TCP
+  - port: 21000
+    name: ftps_opasv_min_port
+    targetPort: 21000
+    protocol: TCP
+  - port: 21001
+    name: ftps_opasv_max_port
+    targetPort: 21001
+    protocol: TCP

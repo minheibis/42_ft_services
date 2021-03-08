@@ -1,0 +1,2 @@
+mysql		user:wordpress		password: wppass
+grafana		user:admin			password: admin

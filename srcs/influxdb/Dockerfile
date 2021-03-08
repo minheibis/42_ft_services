@@ -5,6 +5,10 @@ RUN apk update && apk add bash influxdb telegraf
 
 EXPOSE 8086
 
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
+
 COPY start.sh .
 # Launch all
 CMD /bin/bash start.sh

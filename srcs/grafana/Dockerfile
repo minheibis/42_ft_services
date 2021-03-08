@@ -11,6 +11,9 @@ RUN tar -zxvf grafana-7.4.3.linux-amd64.tar.gz; \
 
 EXPOSE 3000
 
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
 
 COPY start.sh .
 # Launch all
