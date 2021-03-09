@@ -1,3 +1,6 @@
+wordpress	user: user1			password: pass1
+wordpress	user: user2			password: pass2
+wordpress	user: user3			password: pass3
 mysql		user: wordpress		password: wppass
 grafana		user: admin			password: admin
 ftps		user: user			password: pass

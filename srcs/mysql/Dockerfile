@@ -11,6 +11,7 @@ RUN addgroup mysql mysql; \
 
 COPY start.sh .
 COPY start.sql /tmp/start.sql
+COPY wordpress.sql /tmp/wordpress.sql
 
 # telegraf
 # setup telegraf
