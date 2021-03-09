@@ -32,8 +32,13 @@ spec:
     spec:
       containers:
       - name: influxdb
-        image: service_influxdb:latest
+        image: influxdb-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep influxd"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 8086
           name: influxdb

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: service_nginx:latest
+        image: nginx-service:latest
         imagePullPolicy: Never
         livenessProbe:
           exec:

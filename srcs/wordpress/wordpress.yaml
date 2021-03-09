@@ -16,8 +16,13 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: service_wordpress:latest
+        image: wordpress-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep php-fpm7 && pgrep nginx"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 5050
           name: wordpress

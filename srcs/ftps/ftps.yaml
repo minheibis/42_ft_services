@@ -16,8 +16,13 @@ spec:
     spec:
       containers:
       - name: ftps
-        image: service_ftps:latest
+        image: ftps-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep vsftpd"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         env:
           - name: USER
             value: user

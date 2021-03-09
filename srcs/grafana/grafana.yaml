@@ -16,8 +16,13 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: service_grafana:latest
+        image: grafana-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep grafana-server"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 3000
           name: grafana
