@@ -14,7 +14,7 @@
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = 'sdfghnbvcxwertyuirtyuikjhgfcvbnm';
+$cfg['blowfish_secret'] = 'dafhighaweripharhieriafajwkohagh';
 
 /**
  * Servers configuration
@@ -157,4 +157,4 @@ $cfg['SaveDir'] = '';
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
 $cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';
-
+$cfg['PmaAbsoluteUri'] = $_SERVER['REQUEST_SCHEME'] . "://127.0.0.1:" . $_SERVER['SERVER_PORT'] . "/phpmyadmin/";
