@@ -18,9 +18,6 @@ RUN ssh-keygen -q -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key
 # Set SSL certificate
 RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=JP/ST=Tokyo/L=Tokyo/O=42Tokyo/OU=hyuki/CN=localhost" -out /etc/ssl/certs/localhost.crt -keyout /etc/ssl/private/localhost.key
 
-# setup nginx
-RUN rc-service nginx checkconfig
-
 # telegraf
 # setup telegraf
 COPY telegraf.conf /etc/telegraf/
