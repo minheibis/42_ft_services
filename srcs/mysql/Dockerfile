@@ -1,8 +1,8 @@
-FROM alpine:3.9
+FROM base_docker:latest
 
 # Installing packages MariaDB
 RUN apk update; \
-	apk add --no-cache bash vim openrc mysql mysql-client
+	apk add --no-cache mysql mysql-client
 
 RUN addgroup mysql mysql; \
 	chown -R mysql:mysql /var/lib/mysql; \
@@ -11,6 +11,11 @@ RUN addgroup mysql mysql; \
 
 COPY start.sh .
 COPY start.sql /tmp/start.sql
+COPY wordpress.sql /tmp/wordpress.sql
+
+# telegraf
+# setup telegraf
+COPY telegraf.conf /etc/telegraf/
 
 EXPOSE 3306
 

@@ -16,8 +16,13 @@ spec:
     spec:
       containers:
       - name: phpmyadmin
-        image: service_phpmyadmin:latest
+        image: phpmyadmin-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep nginx && pgrep php-fpm7"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 5000
           name: phpmyadmin

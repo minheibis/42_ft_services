@@ -5,7 +5,64 @@
     <title>HTML5</title>
 </head>
 <body>
-    Server is online<br>
-    welcome to nginx
+    <h1>welcome to nginx</h1>
+    <table border="1">
+        <tr>
+          <th>service name</th>
+          <th>user</th>
+          <th>password</th>
+        </tr>
+        <tr>
+          <td>phpmyadmin/mysql</td>
+          <td>wordpress</td>
+          <td>wppass</td>
+        </tr>
+        <tr>
+            <td>wordpress 1</td>
+            <td>user1</td>
+            <td>pass1</td>
+        </tr>
+        <tr>
+            <td>wordpress 2</td>
+            <td>user2</td>
+            <td>pass2</td>
+        </tr>
+        <tr>
+            <td>wordpress 2</td>
+            <td>user2</td>
+            <td>pass2</td>
+        </tr>
+        <tr>
+            <td>grafana</td>
+            <td>admin</td>
+            <td>adminpass</td>
+        </tr>
+        <tr>
+            <td>ftps</td>
+            <td>user</td>
+            <td>pass</td>
+        </tr>
+        <tr>
+            <td>ssh</td>
+            <td>user</td>
+            <td>pass</td>
+        </tr>
+      </table>
+    <h2>phpmyadmin</h2>
+    <p><a href="/phpmyadmin">to phpmyadmin</a></p>
+    <h2>wordpress</h2>
+    <p><a href="/wordpress">to wordpress</a></p>
+    <h2>grafana</h2>
+    <p><a href="http://192.168.49.2:3000">to_grafana</a></p>
+    <h2>ssh</h2>
+    <p>to test ssh<br>
+        "ssh user@192.168.49.2"<br>
+        and enter password "pass"<br>
+        when get an error follow the error command</p>
+    <h2>ftps</h2>
+    <p>to test ftps<br>
+        "lftp -e 'set ssl:verify-certificate false' -u user,pass -p 21 192.168.49.2"<br>
+        to get file use "get FILENAME"<br>
+        to send file use "put FILENAME"</p>
 </body>
 </html>

@@ -32,8 +32,13 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: service_mysql:latest
+        image: mysql-service:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep mysqld"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 3306
           name: mysql

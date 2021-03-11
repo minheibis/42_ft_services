@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-deployment
+  name: grafana-deployment
   labels:
-    app: wordpress
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
+      app: grafana
   template:
     metadata:
       labels:
-        app: wordpress
+        app: grafana
     spec:
       containers:
-      - name: wordpress
-        image: wordpress-service:latest
+      - name: grafana
+        image: grafana-service:latest
         imagePullPolicy: Never
         livenessProbe:
           exec:
-            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep php-fpm7 && pgrep nginx"]
+            command: ["/bin/bash", "-c", "pgrep telegraf && pgrep grafana-server"]
           initialDelaySeconds: 10
           periodSeconds: 5
         ports:
-        - containerPort: 5050
-          name: wordpress
+        - containerPort: 3000
+          name: grafana
 
 ---
 
@@ -34,13 +34,13 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: "true"
-  name: wordpress-service
+  name: grafana-service
 spec:
   selector:
-    app: wordpress
+    app: grafana
   type: LoadBalancer
   ports:
-    - name: wordpress
+    - name: grafana
       protocol: TCP
-      port: 5050
-      targetPort: 5050
+      port: 3000
+      targetPort: 3000

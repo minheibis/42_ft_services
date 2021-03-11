@@ -1,6 +1,8 @@
+echo -e "$PASSWORD\n$PASSWORD" | adduser $USER
+
 # setup nginx
 rc-service nginx checkconfig
 
+/usr/sbin/sshd
 telegraf &
-/usr/sbin/php-fpm7
 nginx -g "daemon off;"
