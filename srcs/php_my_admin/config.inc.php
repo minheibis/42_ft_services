@@ -157,4 +157,4 @@ $cfg['SaveDir'] = '';
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
 $cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';
-$cfg['PmaAbsoluteUri'] = $_SERVER['REQUEST_SCHEME'] . "://127.0.0.1:" . $_SERVER['SERVER_PORT'] . "/phpmyadmin/";
+//$cfg['PmaAbsoluteUri'] = $_SERVER['REQUEST_SCHEME'] . "://127.0.0.1:" . $_SERVER['SERVER_PORT'] . "/phpmyadmin/";
