@@ -9,11 +9,11 @@ RUN apk update; \
 	apk --no-cache add php7-session php7-gettext php7-ldap php7-ctype php7-dom php7-fpm php7-mbstring;
 
 # config nginx
-RUN adduser -D -g 'www' www; \
+RUN adduser -D -g 'www_php' www_php; \
 	mkdir /www; \
 	mkdir -p /run/nginx ; \
-	chown -R www:www /var/lib/nginx; \
-	chown -R www:www /www;
+	chown -R www_php:www_php /var/lib/nginx; \
+	chown -R www_php:www_php /www;
 
 # phpMyAdmin
 # Download
@@ -25,8 +25,8 @@ RUN rm phpMyAdmin-4.9.5-all-languages.tar.gz
 # Configuration
 RUN mkdir -p /var/lib/phpmyadmin/tmp
 RUN rm /var/www/phpmyadmin/config.sample.inc.php
-RUN chown -R www:www /var/lib/phpmyadmin
-RUN chown -R www:www /var/lib/phpmyadmin/tmp
+RUN chown -R www_php:www_php /var/lib/phpmyadmin
+RUN chown -R www_php:www_php /var/lib/phpmyadmin/tmp
 RUN	chmod 777 /var/lib/phpmyadmin/tmp
 
 # Set SSL certificate
